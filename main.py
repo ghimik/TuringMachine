@@ -1,16 +1,17 @@
-# This is a sample Python script.
+from turingmachine import Tape, TuringMachine
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    tape = Tape("11111", blank_symbol='_')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    states = {'q0', 'q1', 'halt'}
+    initial_state = 'q0'
+    final_states = {'halt'}
+
+    transition_function = {
+        ('q0', '1'): ('q0', '0', 'R'),
+        ('q0', '_'): ('halt', '_', 'N'),
+    }
+
+    machine = TuringMachine(tape, states, initial_state, final_states, transition_function)
+
+    machine.run()
