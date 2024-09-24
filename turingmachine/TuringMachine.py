@@ -1,20 +1,21 @@
-from turingmachine import Tape
+from turingmachine import Tape, Alphabet, TransitionFunction
 
 
 class TuringMachine:
-    def __init__(self, tape: Tape, states, initial_state, final_states, transition_function):
+    def __init__(self, tape: Tape, alphabet: Alphabet, states, initial_state,
+                 transition_function: TransitionFunction):
         self.tape = tape
+        self.alphabet = alphabet
         self.states = states
         self.current_state = initial_state
-        self.final_states = final_states
-        self.transition_function = transition_function  # Функция переходов в виде словаря
+        self.transition_function = transition_function
 
     def step(self):
         current_symbol = self.tape.read()
-        if (self.current_state, current_symbol) not in self.transition_function:
-            raise Exception(f"No rule for state '{self.current_state}' with symbol '{current_symbol}'")
+        if not self.alphabet.is_valid_symbol(current_symbol):
+            raise ValueError(f"Invalid symbol on tape: {current_symbol}")
 
-        next_state, write_symbol, direction = self.transition_function[(self.current_state, current_symbol)]
+        next_state, write_symbol, direction = self.transition_function.get_transition(self.current_state, current_symbol)
         self.tape.write(write_symbol)
 
         if direction == 'L':
@@ -25,8 +26,7 @@ class TuringMachine:
         self.current_state = next_state
 
     def run(self):
-        while self.current_state not in self.final_states:
+        while not self.current_state.is_final:
             self.step()
-        print("Machine halted in state:", self.current_state)
+        print(f"Machine halted in state: {self.current_state}")
         print("Final tape content:", self.tape)
-

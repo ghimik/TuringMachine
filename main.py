@@ -1,17 +1,18 @@
-from turingmachine import Tape, TuringMachine
+from turingmachine import Alphabet, State, Tape, TransitionFunction, TuringMachine
 
 if __name__ == '__main__':
-    tape = Tape("11111", blank_symbol='_')
+    alphabet = Alphabet(symbols=['0', '1', '_'])
 
-    states = {'q0', 'q1', 'halt'}
-    initial_state = 'q0'
-    final_states = {'halt'}
+    state_q0 = State('q0')
+    state_q1 = State('q1', is_final=True)
+    states = {state_q0, state_q1}
 
-    transition_function = {
-        ('q0', '1'): ('q0', '0', 'R'),
-        ('q0', '_'): ('halt', '_', 'N'),
-    }
+    tape = Tape("11111")
 
-    machine = TuringMachine(tape, states, initial_state, final_states, transition_function)
+    transition_function = TransitionFunction()
+    transition_function.add_transition(state_q0, '1', state_q0, '0', 'R')
+    transition_function.add_transition(state_q0, '_', state_q1, '_', 'N')
+
+    machine = TuringMachine(tape, alphabet, states, state_q0, transition_function)
 
     machine.run()

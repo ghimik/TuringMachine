@@ -1,2 +1,5 @@
-from .Tape import Tape
-from .TuringMachine import TuringMachine
+from .Tape import *
+from .TuringMachine import *
+from .Alphabet import *
+from .State import *
+from .TransitionFunction import *
