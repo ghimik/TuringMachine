@@ -36,5 +36,6 @@ class TuringMachine:
     def run(self):
         while not self.current_state.is_final:
             self.step()
-        print(f"Machine halted in state: {self.current_state}")
-        print("Final tape content:", self.tape)
+        if DEBUG:
+            print(f"Machine halted in state: {self.current_state}")
+            print("Final tape content:", self.tape)

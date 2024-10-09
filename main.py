@@ -1,18 +1,6 @@
-from turingmachine import Alphabet, State, Tape, TransitionFunction, TuringMachine
+from turingmachine import tm_sort
 
 if __name__ == '__main__':
-    alphabet = Alphabet(symbols=['0', '1', '_'])
+    print(tm_sort(input('Введите последовательность цифр: ')))
 
-    state_q0 = State('q0')
-    state_q1 = State('q1', is_final=True)
 
-    tape = Tape("110111")
-
-    transition_function = TransitionFunction()
-    transition_function.add_transition(state_q0, '0', state_q0, '1', 'R')
-    transition_function.add_transition(state_q0, '1', state_q0, '1', 'R')
-    transition_function.add_transition(state_q0, '_', state_q1, '_', 'N')
-
-    machine = TuringMachine(tape, alphabet, state_q0, transition_function)
-
-    machine.run()
