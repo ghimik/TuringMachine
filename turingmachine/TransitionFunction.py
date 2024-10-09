@@ -1,10 +1,12 @@
+DIRECTIONS = ['L', 'R', 'N']
+
 class TransitionFunction:
     def __init__(self):
         # (состояние, символ) -> (новое состояние, символ для записи, направление)
         self.transitions = {}
 
     def add_transition(self, current_state, symbol, next_state, write_symbol, direction):
-        if direction not in ['L', 'R', 'N']:
+        if direction not in DIRECTIONS:
             raise ValueError(f"Invalid direction: {direction}. Must be 'L', 'R', or 'N'.")
         self.transitions[(current_state, symbol)] = (next_state, write_symbol, direction)
 

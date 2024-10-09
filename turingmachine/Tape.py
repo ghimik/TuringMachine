@@ -1,3 +1,4 @@
+
 class Tape:
     def __init__(self, input_string='', blank_symbol='_'):
         self.blank_symbol = blank_symbol

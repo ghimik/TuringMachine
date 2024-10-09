@@ -1,5 +1,5 @@
 from turingmachine import Tape, Alphabet, TransitionFunction
-
+DEBUG = True
 
 class TuringMachine:
     def __init__(self, tape: Tape, alphabet: Alphabet, initial_state,
@@ -15,6 +15,9 @@ class TuringMachine:
             raise ValueError(f"Invalid symbol on tape: {current_symbol}")
 
         next_state, write_symbol, direction = self.transition_function.get_transition(self.current_state, current_symbol)
+        if DEBUG:
+            print(f'Tape: {self.tape}')
+            print(f'State: {self.current_state}')
         self.tape.write(write_symbol)
 
         if direction == 'L':
