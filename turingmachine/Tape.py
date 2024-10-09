@@ -40,4 +40,4 @@ class Tape:
                     display_tape.append(self.tape[i])
             return ''.join(display_tape).strip(self.blank_symbol)
         else:
-            return ''.join(self.tape)
+            return ''.join(self.tape).strip(self.blank_symbol)
