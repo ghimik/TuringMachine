@@ -166,6 +166,9 @@ def run_turing_machine(tape, alphabet, state_start, transition_function):
         initial_state=state_start,
         transition_function=transition_function
     )
+
+    # михалыч запускай дизель
+
     turing_machine.run()
     return turing_machine
 
