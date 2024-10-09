@@ -2,11 +2,10 @@ from turingmachine import Tape, Alphabet, TransitionFunction
 
 
 class TuringMachine:
-    def __init__(self, tape: Tape, alphabet: Alphabet, states, initial_state,
+    def __init__(self, tape: Tape, alphabet: Alphabet, initial_state,
                  transition_function: TransitionFunction):
         self.tape = tape
         self.alphabet = alphabet
-        self.states = states
         self.current_state = initial_state
         self.transition_function = transition_function
 
