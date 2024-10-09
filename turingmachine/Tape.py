@@ -1,3 +1,4 @@
+from turingmachine.configs import DEBUG
 
 class Tape:
     def __init__(self, input_string='', blank_symbol='_'):
@@ -24,5 +25,19 @@ class Tape:
     def move_right(self):
         self.head_position += 1
 
+    def slice_from_current_pos(self):
+        return ''.join(self.tape[self.head_position::])
+
     def __str__(self):
-        return ''.join(self.tape).strip(self.blank_symbol)
+        if DEBUG:
+            # Создаем новый список для отображения ленты с выделенным текущим символом
+            display_tape = []
+            for i in range(len(self.tape)):
+                if i == self.head_position:
+                    # Выделяем текущий символ
+                    display_tape.append(f'[{self.tape[i]}]')
+                else:
+                    display_tape.append(self.tape[i])
+            return ''.join(display_tape).strip(self.blank_symbol)
+        else:
+            return ''.join(self.tape)

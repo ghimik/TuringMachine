@@ -1,5 +1,5 @@
 from turingmachine import Tape, Alphabet, TransitionFunction
-DEBUG = True
+from turingmachine.configs import DEBUG
 
 class TuringMachine:
     def __init__(self, tape: Tape, alphabet: Alphabet, initial_state,
@@ -16,6 +16,7 @@ class TuringMachine:
 
         next_state, write_symbol, direction = self.transition_function.get_transition(self.current_state, current_symbol)
         if DEBUG:
+            print('STEP START')
             print(f'Tape: {self.tape}')
             print(f'State: {self.current_state}')
         self.tape.write(write_symbol)
@@ -26,6 +27,11 @@ class TuringMachine:
             self.tape.move_right()
 
         self.current_state = next_state
+        if DEBUG:
+            print('TO')
+            print(f'Tape: {self.tape}')
+            print(f'State: {self.current_state}')
+            print('STEP END')
 
     def run(self):
         while not self.current_state.is_final:
